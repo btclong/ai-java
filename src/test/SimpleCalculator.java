@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
@@ -16,9 +17,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.Arrays;
 
 public class SimpleCalculator extends JFrame {
     private static final String FONT_NAME = "Malgun Gothic";
+    private static final String LOGIN_USERNAME = "admin";
+    private static final String LOGIN_PASSWORD = "1234";
+    private static final int MAX_LOGIN_ATTEMPTS = 3;
 
     private final JTextField firstNumberField;
     private final JTextField secondNumberField;
@@ -172,10 +177,62 @@ public class SimpleCalculator extends JFrame {
         resultDialog.setVisible(true);
     }
 
+    private static boolean showLoginDialog() {
+        for (int attempt = 1; attempt <= MAX_LOGIN_ATTEMPTS; attempt++) {
+            JTextField usernameField = new JTextField();
+            JPasswordField passwordField = new JPasswordField();
+
+            JPanel loginPanel = new JPanel(new GridLayout(2, 2, 8, 8));
+            loginPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+            loginPanel.add(new JLabel("아이디"));
+            loginPanel.add(usernameField);
+            loginPanel.add(new JLabel("비밀번호"));
+            loginPanel.add(passwordField);
+
+            int option = JOptionPane.showConfirmDialog(
+                    null,
+                    loginPanel,
+                    "로그인",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (option != JOptionPane.OK_OPTION) {
+                return false;
+            }
+
+            if (isValidLogin(usernameField.getText().trim(), passwordField.getPassword())) {
+                JOptionPane.showMessageDialog(null, "로그인되었습니다.");
+                return true;
+            }
+
+            int remainingAttempts = MAX_LOGIN_ATTEMPTS - attempt;
+            if (remainingAttempts > 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "아이디 또는 비밀번호가 올바르지 않습니다. 남은 시도: " + remainingAttempts
+                );
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, "로그인 실패 횟수를 초과했습니다.");
+        return false;
+    }
+
+    private static boolean isValidLogin(String username, char[] passwordChars) {
+        try {
+            return LOGIN_USERNAME.equals(username) && LOGIN_PASSWORD.equals(String.valueOf(passwordChars));
+        } finally {
+            Arrays.fill(passwordChars, '\0');
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            SimpleCalculator calculator = new SimpleCalculator();
-            calculator.setVisible(true);
+            if (showLoginDialog()) {
+                SimpleCalculator calculator = new SimpleCalculator();
+                calculator.setVisible(true);
+            }
         });
     }
 }
