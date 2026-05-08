@@ -11,6 +11,7 @@ public class DiaryDto {
     private String content;
     private String weather;
     private LocalDateTime createdDate;
+    private Jlabel2 name; // generate error
 
     public DiaryDto() {
     }

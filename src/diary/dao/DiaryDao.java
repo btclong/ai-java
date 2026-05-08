@@ -18,6 +18,7 @@ public class DiaryDao {
     private static final String UPDATE_SQL = "UPDATE diary SET title = ?, content = ?, weather = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM diary WHERE id = ?";
 
+
     public boolean insert(DiaryDto diary) throws SQLException {
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(INSERT_SQL)) {
