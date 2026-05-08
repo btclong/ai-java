@@ -7,6 +7,7 @@
 
 <hr>
 
+![로그인 흐름도](login-flow.svg)
 
 # 🎨 컬러 계산기 (SimpleCalculator)
 
@@ -37,3 +38,4 @@ SimpleCalculator/
 │   └── calculator.png                # 계산기 아이콘 (80x80 권장)
 ├── README.md
 └── .gitignore (선택)  
+```

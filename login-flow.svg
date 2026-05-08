@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" role="img" aria-labelledby="title desc">
+  <title id="title">로그인 흐름도</title>
+  <desc id="desc">시작에서 로그인 여부를 확인하고, 예이면 대시보드로 이동한 뒤 종료하며, 아니오이면 로그인 페이지로 이동한 뒤 종료하는 흐름도입니다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f3a45"/>
+    </marker>
+    <style>
+      .node { fill: #ffffff; stroke: #344054; stroke-width: 2; }
+      .terminal { fill: #eef7ff; }
+      .decision { fill: #fff7df; }
+      .label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif; font-size: 18px; fill: #111827; text-anchor: middle; dominant-baseline: middle; }
+      .edge { stroke: #2f3a45; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .edge-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif; font-size: 15px; fill: #344054; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect class="node terminal" x="40" y="105" width="110" height="70" rx="35"/>
+  <text class="label" x="95" y="140">시작</text>
+
+  <polygon class="node decision" points="275,90 345,140 275,190 205,140"/>
+  <text class="label" x="275" y="140">로그인?</text>
+
+  <rect class="node" x="425" y="45" width="130" height="70" rx="8"/>
+  <text class="label" x="490" y="80">대시보드</text>
+
+  <rect class="node" x="410" y="165" width="160" height="70" rx="8"/>
+  <text class="label" x="490" y="200">로그인 페이지</text>
+
+  <rect class="node terminal" x="650" y="105" width="90" height="70" rx="35"/>
+  <text class="label" x="695" y="140">종료</text>
+
+  <path class="edge" d="M150 140 H202"/>
+  <path class="edge" d="M345 140 C380 140 385 80 422 80"/>
+  <path class="edge" d="M345 140 C380 140 385 200 407 200"/>
+  <path class="edge" d="M555 80 C610 80 615 140 647 140"/>
+  <path class="edge" d="M570 200 C620 200 615 140 647 140"/>
+
+  <text class="edge-label" x="385" y="92">예</text>
+  <text class="edge-label" x="385" y="192">아니오</text>
+</svg>
